@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px; /* Reduzido o padding externo */
             position: relative;
             overflow-x: hidden;
         }
@@ -84,10 +84,10 @@
         .invitation-container::before {
             content: '';
             position: absolute;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
             border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 14px;
             pointer-events: none;
@@ -316,42 +316,61 @@
             animation: fadeInScale 1s ease-out 4.5s forwards;
         }
 
-        /* Responsividade para celulares */
+        /* ========================================================= */
+        /* RESPONSIVIDADE E COMPACTAÇÃO PARA CABER NA TELA DO CELULAR */
+        /* ========================================================= */
         @media (max-width: 768px) {
-            .invitation-container { padding: 40px 25px; }
-            .couple-names { font-size: 52px; }
-            .verse-text { font-size: 19px; }
-            .detail-value { font-size: 21px; }
-            .location-name { font-size: 18px; }
-            
-            /* Ajuste dos botões para caberem lado a lado no celular */
-            .action-buttons {
-                gap: 15px; /* Reduz o espaço entre eles */
-            }
-            .btn {
-                width: 60px;
-                height: 60px;
-                font-size: 22px;
-            }
-            .btn-text {
-                font-size: 13px;
-            }
+            .invitation-container { padding: 25px 15px; }
+            .couple-names { font-size: 48px; }
+            .action-buttons { gap: 15px; }
+            .btn { width: 55px; height: 55px; font-size: 20px; }
+            .btn-text { font-size: 12px; }
         }
 
+        /* Ajustes radicais de margem/preenchimento para celulares */
         @media (max-width: 480px) {
-            .invitation-container { padding: 30px 20px; }
-            .couple-names { font-size: 42px; }
-            .action-buttons {
-                gap: 10px; /* Ainda mais juntos em telas bem pequenas */
+            body { padding: 5px; }
+            .invitation-container {
+                padding: 15px 10px; /* Reduz muito as bordas brancas */
+                border-width: 2px;
             }
-            .btn {
-                width: 55px;
-                height: 55px;
-                font-size: 20px;
+            .invitation-container::before {
+                top: 6px; left: 6px; right: 6px; bottom: 6px;
             }
-            .btn-text {
-                font-size: 11px;
-            }
+
+            .ornament-top { margin-bottom: 10px; font-size: 28px; margin-top: 5px; }
+            .header { margin-bottom: 15px; }
+            .couple-names { font-size: 38px; margin-bottom: 5px; line-height: 1; }
+            
+            .divider { margin: 10px 0; gap: 10px; }
+            .divider-icon { font-size: 18px; }
+            
+            .bible-verse { margin: 12px 0; }
+            .verse-text { font-size: 15px; margin-bottom: 5px; line-height: 1.3; }
+            .verse-reference { font-size: 12px; letter-spacing: 1px; }
+
+            .event-details { margin: 15px 0; }
+            .detail-section { margin-bottom: 15px; } /* Muito menos espaço entre data/hora/local */
+            .detail-icon { font-size: 20px; margin-bottom: 5px; }
+            .detail-label { font-size: 11px; margin-bottom: 2px; letter-spacing: 2px; }
+            .detail-value { font-size: 18px; line-height: 1.2; }
+            .location-name { font-size: 14px; margin-top: 2px; }
+
+            .action-buttons { margin-top: 20px; gap: 10px; }
+            .btn-wrapper { gap: 6px; }
+            .btn { width: 45px; height: 45px; font-size: 18px; border-width: 1.5px; }
+            .btn-text { font-size: 10px; letter-spacing: 0px; }
+
+            .ornament-bottom { margin-top: 15px; font-size: 28px; margin-bottom: 5px; }
+        }
+
+        /* Para telas de celulares muito baixinhas (ex: iPhone SE, antigos) */
+        @media (max-height: 700px) and (max-width: 480px) {
+            .couple-names { font-size: 34px; }
+            .verse-text { font-size: 13px; }
+            .detail-value { font-size: 16px; }
+            .detail-section { margin-bottom: 10px; }
+            .divider { margin: 5px 0; }
         }
 
         .scroll-animate {
