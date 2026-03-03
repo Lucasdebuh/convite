@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lidiana & Jefferson | Convite de Casamento</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, #FEFDF8 0%, #F9F7F0 50%, #FFF9F0 100%);
+            color: #1C3A1C;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Partículas douradas flutuantes */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #FFD700 0%, #D4AF37 50%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite ease-in-out;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.5; }
+            25% { transform: translateY(-30px) translateX(10px) scale(1.2); opacity: 0.8; }
+            50% { transform: translateY(-15px) translateX(-10px) scale(0.9); opacity: 0.3; }
+            75% { transform: translateY(-40px) translateX(15px) scale(1.1); opacity: 0.6; }
+        }
+
+        /* Container principal */
+        .invitation-container {
+            max-width: 900px;
+            width: 100%;
+            background: #FFFFFF;
+            border: 3px solid #D4AF37;
+            box-shadow: 0 25px 70px rgba(45, 106, 79, 0.15), 
+                        0 0 60px rgba(212, 175, 55, 0.1),
+                        inset 0 2px 3px rgba(212, 175, 55, 0.08);
+            border-radius: 20px;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeInContainer 1.2s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Borda interna dourada decorativa */
+        .invitation-container::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        /* Animações de entrada suaves */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
+
+        /* Ornamentos decorativos superiores */
+        .ornament-top {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 50px;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 40%, #C5A028 70%, #A8860C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 8px rgba(212, 175, 55, 0.3));
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 0.8s forwards;
+        }
+
+        /* Cabeçalho */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 1.2s forwards;
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 72px;
+            font-weight: 400;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 25%, #2D6A4F 50%, #1B5E20 75%, #C5A028 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.25));
+            animation: shimmer 4s linear infinite;
+        }
+
+        /* Separador decorativo */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+            opacity: 0;
+        }
+        .divider:nth-of-type(1) { animation: fadeInLeft 1s ease-out 1.6s forwards; }
+        .divider:nth-of-type(2) { animation: fadeInRight 1s ease-out 2.2s forwards; }
+        .divider:nth-of-type(3) { animation: fadeInLeft 1s ease-out 3.5s forwards; }
+
+        .divider-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%);
+        }
+
+        .divider-icon {
+            font-size: 26px;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #C5A028 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        }
+
+        /* Versículo bíblico */
+        .bible-verse {
+            text-align: center;
+            margin: 35px 0;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 2s forwards;
+        }
+
+        .verse-text {
+            font-size: 21px;
+            font-style: italic;
+            color: #2D6A4F;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(45, 106, 79, 0.08);
+        }
+
+        .verse-reference {
+            font-size: 16px;
+            color: #D4AF37;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Informações do evento */
+        .event-details {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .detail-section {
+            margin-bottom: 35px;
+            opacity: 0;
+        }
+
+        .detail-section:nth-child(1) { animation: fadeInUp 1s ease-out 2.8s forwards; }
+        .detail-section:nth-child(2) { animation: fadeInUp 1s ease-out 3.1s forwards; }
+        .detail-section:nth-child(3) { animation: fadeInUp 1s ease-out 3.4s forwards; }
+
+        .detail-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #C5A028 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-label {
+            font-size: 14px;
+            color: #1B5E20;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .detail-value {
+            font-size: 25px;
+            color: #1C3A1C;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .location-name {
+            font-size: 20px;
+            color: #2D6A4F;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* NOVA ESTILIZAÇÃO DOS BOTÕES - Redondos e Horizontais */
+        .action-buttons {
+            display: flex;
+            flex-direction: row; /* Força a ficar na horizontal */
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 45px;
+            width: 100%;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .btn-wrapper:nth-child(1) { animation: fadeInScale 0.8s ease-out 3.8s forwards; }
+        .btn-wrapper:nth-child(2) { animation: fadeInScale 0.8s ease-out 4s forwards; }
+        .btn-wrapper:nth-child(3) { animation: fadeInScale 0.8s ease-out 4.2s forwards; }
+
+        .btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%; /* Faz o botão ser um círculo perfeito */
+            background-color: #FFFFFF;
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .btn-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #B8860B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+
+        /* Efeito ao passar o mouse */
+        .btn-wrapper:hover .btn {
+            background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+            color: #FFFFFF;
+            border-color: #C5A028;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .btn-wrapper:hover .btn-text {
+            color: #C5A028;
+        }
+
+        /* Ornamento inferior */
+        .ornament-bottom {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 40px;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 40%, #C5A028 70%, #A8860C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 3px 8px rgba(212, 175, 55, 0.3));
+            opacity: 0;
+            animation: fadeInScale 1s ease-out 4.5s forwards;
+        }
+
+        /* Responsividade para celulares */
+        @media (max-width: 768px) {
+            .invitation-container { padding: 40px 25px; }
+            .couple-names { font-size: 52px; }
+            .verse-text { font-size: 19px; }
+            .detail-value { font-size: 21px; }
+            .location-name { font-size: 18px; }
+            
+            /* Ajuste dos botões para caberem lado a lado no celular */
+            .action-buttons {
+                gap: 15px; /* Reduz o espaço entre eles */
+            }
+            .btn {
+                width: 60px;
+                height: 60px;
+                font-size: 22px;
+            }
+            .btn-text {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-container { padding: 30px 20px; }
+            .couple-names { font-size: 42px; }
+            .action-buttons {
+                gap: 10px; /* Ainda mais juntos em telas bem pequenas */
+            }
+            .btn {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
+            .btn-text {
+                font-size: 11px;
+            }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-animate.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="invitation-container">
+        <div class="ornament-top">❖ ✦ ❖</div>
+
+        <div class="header">
+            <h1 class="couple-names">Lidiana & Jefferson</h1>
+        </div>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon"><i class="fas fa-ring"></i></div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="bible-verse">
+            <p class="verse-text">"Portanto, o que Deus ajuntou não separe o homem."</p>
+            <p class="verse-reference">Mateus 19:6</p>
+        </div>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon"><i class="fas fa-heart"></i></div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="event-details">
+            <div class="detail-section">
+                <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
+                <div class="detail-label">Data</div>
+                <div class="detail-value">21 de Março de 2026</div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-icon"><i class="far fa-clock"></i></div>
+                <div class="detail-label">Horário</div>
+                <div class="detail-value">12:30 hs</div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="detail-label">Local</div>
+                <div class="detail-value">Restaurante Casa Do Mar</div>
+                <div class="location-name">Praia Virgem – Rio das Ostras</div>
+            </div>
+        </div>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon"><i class="fas fa-gem"></i></div>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="https://wa.me/5522998290740?text=Ol%C3%A1!%20Confirmo%20minha%20presen%C3%A7a%20no%20casamento%20de%20Lidiana%20%26%20Jefferson%20no%20dia%2021%20de%20mar%C3%A7o%20de%202026.%20%F0%9F%A5%82%F0%9F%92%8D" target="_blank" class="btn-wrapper">
+                <div class="btn"><i class="fab fa-whatsapp"></i></div>
+                <span class="btn-text">Confirmar</span>
+            </a>
+
+            <a href="https://maps.app.goo.gl/ABxyQj77SGcQsLjL7" target="_blank" class="btn-wrapper">
+                <div class="btn"><i class="fas fa-map-marked-alt"></i></div>
+                <span class="btn-text">Localização</span>
+            </a>
+
+            <a href="#" id="saveDate" class="btn-wrapper">
+                <div class="btn"><i class="far fa-calendar-plus"></i></div>
+                <span class="btn-text">Salvar<br>Data</span>
+            </a>
+        </div>
+
+        <div class="ornament-bottom">❖ ✦ ❖</div>
+    </div>
+
+    <script>
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 60;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 5 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollElements = document.querySelectorAll('.scroll-animate');
+            scrollElements.forEach(el => observer.observe(el));
+        });
+
+        document.getElementById('saveDate').addEventListener('click', function(e) {
+            e.preventDefault();
+            const event = {
+                title: 'Casamento Lidiana & Jefferson',
+                description: 'Casamento de Lidiana e Jefferson - Restaurante Casa Do Mar, Praia Virgem, Rio das Ostras',
+                location: 'Restaurante Casa Do Mar - Praia Virgem - Rio das Ostras',
+                start: '2026-03-21T12:30:00',
+                end: '2026-03-21T18:00:00'
+            };
+
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Convite de Casamento//PT-BR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+DTSTART:20260321T123000
+DTEND:20260321T180000
+DTSTAMP:20260101T000000
+UID:${Date.now()}@casamento-lidiana-jefferson
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-P1D
+DESCRIPTION:Lembrete: Casamento amanhã!
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'casamento-lidiana-jefferson.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
