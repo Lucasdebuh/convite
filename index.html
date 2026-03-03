@@ -121,24 +121,19 @@
             text-align: center;
             opacity: 0;
             animation: fadeInUp 1.2s ease-out 1.2s forwards;
-            padding: 0 10px; 
-            margin-bottom: -15px; /* Compensa o espaço extra criado pelo padding do nome */
+            padding: 0 10px; /* Evita corte nas letras cursivas */
         }
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(32px, 11vw, 72px);
+            font-size: clamp(32px, 11vw, 72px); /* Letra cresce e diminui sem quebrar a tela */
             font-weight: 400;
             background: linear-gradient(135deg, #FFD700 0%, #D4AF37 25%, #2D6A4F 50%, #1B5E20 75%, #C5A028 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            /* AQUI ESTÁ A CORREÇÃO MÁGICA PARA NÃO CORTAR AS LETRAS */
-            line-height: 1.4; 
-            padding-bottom: 25px; 
-            padding-top: 10px;
-            /* --------------------------------------------------- */
+            line-height: 1.1;
             filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.25));
             animation: shimmer 4s linear infinite;
         }
@@ -381,9 +376,9 @@
                 <span class="btn-text">Local</span>
             </a>
 
-            <a href="#" id="saveDate" class="btn-wrapper">
-                <div class="btn"><i class="far fa-calendar-plus"></i></div>
-                <span class="btn-text">Salvar</span>
+            <a href="https://www.instagram.com/casadomar_ro/" target="_blank" class="btn-wrapper">
+                <div class="btn"><i class="fab fa-instagram"></i></div>
+                <span class="btn-text">Ver Fotos</span>
             </a>
         </div>
 
@@ -393,7 +388,7 @@
     <script>
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 40; 
+            const particleCount = 40; /* Reduzido para melhor performance no celular */
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
@@ -407,48 +402,6 @@
                 particlesContainer.appendChild(particle);
             }
         }
-
-        document.getElementById('saveDate').addEventListener('click', function(e) {
-            e.preventDefault();
-            const event = {
-                title: 'Casamento Lidiana & Jefferson',
-                description: 'Casamento de Lidiana e Jefferson - Restaurante Casa Do Mar, Praia Virgem, Rio das Ostras',
-                location: 'Restaurante Casa Do Mar - Praia Virgem - Rio das Ostras',
-                start: '2026-03-21T12:30:00',
-                end: '2026-03-21T18:00:00'
-            };
-
-            const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Convite de Casamento//PT-BR
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-BEGIN:VEVENT
-DTSTART:20260321T123000
-DTEND:20260321T180000
-DTSTAMP:20260101T000000
-UID:${Date.now()}@casamento-lidiana-jefferson
-SUMMARY:${event.title}
-DESCRIPTION:${event.description}
-LOCATION:${event.location}
-STATUS:CONFIRMED
-SEQUENCE:0
-BEGIN:VALARM
-TRIGGER:-P1D
-DESCRIPTION:Lembrete: Casamento amanhã!
-ACTION:DISPLAY
-END:VALARM
-END:VEVENT
-END:VCALENDAR`;
-
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.setAttribute('download', 'casamento-lidiana-jefferson.ics');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        });
 
         window.addEventListener('load', createParticles);
     </script>
