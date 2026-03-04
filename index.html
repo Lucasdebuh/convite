@@ -19,18 +19,17 @@
             font-family: 'Cormorant Garamond', serif;
             background: linear-gradient(135deg, #FEFDF8 0%, #F9F7F0 50%, #FFF9F0 100%);
             color: #1C3A1C;
-            height: 100vh; /* Fallback para navegadores muito antigos */
-            height: 100dvh; /* A MÁGICA AQUI: Altura Dinâmica da Tela */
+            height: 100vh;
+            height: 100dvh;
             width: 100vw;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 2vh 3vw; 
             position: relative;
-            overflow: hidden; /* Proíbe a rolagem da tela inteira */
+            overflow: hidden;
         }
 
-        /* Partículas douradas flutuantes */
         .particles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1;
@@ -49,16 +48,15 @@
             50% { transform: translateY(-15px) translateX(-10px) scale(0.9); opacity: 0.3; }
         }
 
-        /* Container principal flexível e auto-adaptável */
         .invitation-container {
             max-width: 900px;
             width: 100%;
-            height: 100%; /* Ocupa 100% do espaço livre do body */
+            height: 100%;
             background: #FFFFFF;
             border: 3px solid #D4AF37;
             box-shadow: 0 25px 70px rgba(45, 106, 79, 0.15), inset 0 2px 3px rgba(212, 175, 55, 0.08);
             border-radius: 20px;
-            padding: 3vh 15px; /* Aumentado o padding vertical para evitar o corte */
+            padding: 3vh 10px; 
             position: relative;
             z-index: 2;
             opacity: 0;
@@ -75,7 +73,6 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Borda interna dourada (Ajustada para ficar mais longe das bordas reais) */
         .invitation-container::before {
             content: ''; position: absolute;
             top: 8px; left: 8px; right: 8px; bottom: 8px;
@@ -87,8 +84,6 @@
         @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
 
-        /* Componentes Ajustados à Proporção */
-        
         .ornament-top, .ornament-bottom {
             font-size: clamp(16px, min(4vw, 4vh), 30px);
             background: linear-gradient(135deg, #FFD700 0%, #D4AF37 40%, #C5A028 70%, #A8860C 100%);
@@ -106,12 +101,14 @@
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
-            font-size: clamp(22px, 8.5vw, 65px); 
+            white-space: nowrap; 
+            font-size: clamp(28px, 11.5vw, 80px); 
             font-weight: 400;
             background: linear-gradient(135deg, #FFD700 0%, #D4AF37 25%, #2D6A4F 50%, #1B5E20 75%, #C5A028 100%);
             background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 0.9; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
+            line-height: 1.4; /* SOLUÇÃO: Aumentado para dar espaço aos laços da fonte */
+            padding: 10px 5px; /* SOLUÇÃO: Mais respiro para o corte do background */
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
             animation: shimmer 4s linear infinite;
         }
 
@@ -119,7 +116,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(10px, 2.5vw, 16px);
             color: #1B5E20; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;
-            margin-top: 0.5vh;
+            margin-top: -15px; /* SOLUÇÃO: Puxa o subtítulo para perto do nome novamente */
         }
 
         .divider {
@@ -142,7 +139,6 @@
         .detail-value { font-size: clamp(14px, 3.5vw, 22px); color: #1C3A1C; font-weight: 700; line-height: 1.1; }
         .location-name { font-size: clamp(12px, 3vw, 18px); color: #2D6A4F; font-weight: 500; }
 
-        /* Botões */
         .action-buttons {
             display: flex; flex-direction: row; justify-content: center; gap: 4vw; width: 100%;
         }
@@ -164,7 +160,6 @@
         .btn-wrapper:hover .btn { background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%); color: #FFFFFF; border-color: #C5A028; transform: translateY(-3px); }
         .btn-wrapper:hover .btn-text { color: #C5A028; }
 
-        /* Seção PIX */
         .pix-section {
             text-align: center;
             padding: clamp(6px, 1.2vh, 12px) 15px;
@@ -189,7 +184,6 @@
         .pix-info { font-size: clamp(9px, 2.5vw, 13px); color: #555; line-height: 1.2; font-weight: 500; }
         .pix-info strong { color: #1C3A1C; display: block; }
 
-        /* Proteção para telas absurdamente pequenas (como iPhone SE na horizontal) */
         @media (max-height: 550px) {
             .bible-verse { display: none; } 
             .divider { margin: 1px 0; gap: 5px; }
@@ -279,7 +273,7 @@
                 </button>
             </div>
             <div class="pix-info">
-                Banco Itaú
+                Banco Itaú<br>
                 <strong>Jefferson Luiz da s Rezende</strong>
             </div>
         </div>
