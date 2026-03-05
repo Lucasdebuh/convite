@@ -106,8 +106,8 @@
             font-weight: 400;
             background: linear-gradient(135deg, #FFD700 0%, #D4AF37 25%, #2D6A4F 50%, #1B5E20 75%, #C5A028 100%);
             background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 1.4; /* SOLUÇÃO: Aumentado para dar espaço aos laços da fonte */
-            padding: 10px 5px; /* SOLUÇÃO: Mais respiro para o corte do background */
+            line-height: 1.4; 
+            padding: 10px 5px; 
             filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.2));
             animation: shimmer 4s linear infinite;
         }
@@ -116,7 +116,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(10px, 2.5vw, 16px);
             color: #1B5E20; text-transform: uppercase; letter-spacing: 3px; font-weight: 700;
-            margin-top: -15px; /* SOLUÇÃO: Puxa o subtítulo para perto do nome novamente */
+            margin-top: -15px; 
         }
 
         .divider {
@@ -159,30 +159,6 @@
 
         .btn-wrapper:hover .btn { background: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%); color: #FFFFFF; border-color: #C5A028; transform: translateY(-3px); }
         .btn-wrapper:hover .btn-text { color: #C5A028; }
-
-        .pix-section {
-            text-align: center;
-            padding: clamp(6px, 1.2vh, 12px) 15px;
-            background: rgba(249, 247, 240, 0.8);
-            border: 1px dashed rgba(212, 175, 55, 0.5); border-radius: 10px;
-            opacity: 0; animation: fadeInUp 1s ease-out 2.5s forwards;
-            width: 95%; max-width: 350px;
-        }
-        .pix-title { font-size: clamp(10px, 2.8vw, 15px); color: #1B5E20; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .pix-box {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: #FFFFFF; border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 50px; padding: 4px 10px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); margin-bottom: 5px;
-        }
-        .pix-key { font-family: sans-serif; font-size: clamp(12px, 3.2vw, 16px); color: #333; font-weight: 600; letter-spacing: 1px; }
-        .btn-copy {
-            background: #D4AF37; color: #FFF; border: none; padding: 4px 10px; border-radius: 20px;
-            font-size: clamp(9px, 2.2vw, 11px); font-weight: bold; cursor: pointer; transition: all 0.3s;
-            font-family: 'Cormorant Garamond', serif; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .btn-copy:hover { background: #C5A028; transform: scale(1.05); }
-        .pix-info { font-size: clamp(9px, 2.5vw, 13px); color: #555; line-height: 1.2; font-weight: 500; }
-        .pix-info strong { color: #1C3A1C; display: block; }
 
         @media (max-height: 550px) {
             .bible-verse { display: none; } 
@@ -264,20 +240,6 @@
             </a>
         </div>
 
-        <div class="pix-section">
-            <div class="pix-title">Ajude na Lua de Mel com Pix</div>
-            <div class="pix-box">
-                <span class="pix-key" id="pixKey">08038436741</span>
-                <button class="btn-copy" onclick="copyPix(this)">
-                    <i class="far fa-copy"></i> Copiar
-                </button>
-            </div>
-            <div class="pix-info">
-                Banco Itaú<br>
-                <strong>Jefferson Luiz da s Rezende</strong>
-            </div>
-        </div>
-
         <div class="ornament-bottom">❖ ✦ ❖</div>
     </div>
 
@@ -297,21 +259,6 @@
                 particle.style.animationDelay = Math.random() * 5 + 's';
                 particlesContainer.appendChild(particle);
             }
-        }
-
-        function copyPix(buttonElement) {
-            const pixKey = document.getElementById('pixKey').innerText;
-            navigator.clipboard.writeText(pixKey).then(() => {
-                const originalText = buttonElement.innerHTML;
-                buttonElement.innerHTML = '<i class="fas fa-check"></i> Copiado!';
-                buttonElement.style.background = '#2D6A4F'; 
-                setTimeout(() => {
-                    buttonElement.innerHTML = originalText;
-                    buttonElement.style.background = '#D4AF37'; 
-                }, 2500);
-            }).catch(err => {
-                alert("Copie a chave manualmente: " + pixKey);
-            });
         }
 
         window.addEventListener('load', createParticles);
