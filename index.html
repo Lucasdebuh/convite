@@ -262,6 +262,28 @@
         }
 
         window.addEventListener('load', createParticles);
+
+        // --- SISTEMA DE ÁUDIO INVISÍVEL ---
+        let audioIniciado = false;
+        
+        function iniciarMusica() {
+            if (!audioIniciado) {
+                const iframe = document.createElement('iframe');
+                // Converte o link do Shorts para o formato Embed do YouTube.
+                // Parâmetros: autoplay=1 (toca sozinho), loop=1 (repete), playlist=WxnpecKm4tA (necessário para o loop)
+                iframe.src = "https://www.youtube.com/embed/WxnpecKm4tA?autoplay=1&loop=1&playlist=WxnpecKm4tA&controls=0";
+                iframe.style.display = "none"; // Esconde totalmente o player
+                iframe.setAttribute('allow', 'autoplay');
+                document.body.appendChild(iframe);
+                audioIniciado = true;
+            }
+        }
+
+        // Tenta iniciar a música na primeira interação do usuário (toque na tela, rolagem, clique)
+        // Isso contorna o bloqueio de reprodução automática imposto por navegadores modernos.
+        window.addEventListener('click', iniciarMusica, { once: true });
+        window.addEventListener('touchstart', iniciarMusica, { once: true });
+        window.addEventListener('scroll', iniciarMusica, { once: true });
     </script>
 </body>
 </html>
